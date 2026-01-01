@@ -64,7 +64,7 @@ The application exposes **RESTful APIs** that can be consumed by any frontend (W
 
 ---
 
-## 📦 Features Implemented (Mapped to Requirements)
+## 📦 Features Implemented
 
 ### ✅ Product Management
 
