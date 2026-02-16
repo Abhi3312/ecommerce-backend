@@ -64,7 +64,6 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setStatus(OrderStatus.PLACED);
 
-        // COPY ADDRESS SNAPSHOT
         order.setShippingFullName(address.getFullName());
         order.setShippingPhone(address.getPhone());
         order.setShippingStreet(address.getStreet());
@@ -79,13 +78,21 @@ public class OrderServiceImpl implements OrderService {
 
             Product product = cartItem.getProduct();
 
-            if (cartItem.getQuantity() > product.getStock()) {
+            if (cartItem.getQuantity() > product.getAvailableStock()) {
                 throw new BadRequestException(
                         "Insufficient stock for " + product.getName()
                 );
             }
 
-            product.setStock(product.getStock() - cartItem.getQuantity());
+
+            product.setAvailableStock(
+                    product.getAvailableStock() - cartItem.getQuantity()
+            );
+
+            product.setReservedStock(
+                    product.getReservedStock() + cartItem.getQuantity()
+            );
+
 
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);

@@ -34,7 +34,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    // ADDRESS SNAPSHOT
+
     private String shippingFullName;
     private String shippingPhone;
     private String shippingStreet;

@@ -26,7 +26,9 @@ public class ProductServiceImpl implements ProductService {
                 .name(request.getName())
                 .description(request.getDescription())
                 .price(request.getPrice())
-                .stock(request.getStock())
+                .totalStock(request.getTotalStock())
+                .availableStock(request.getTotalStock())
+                .reservedStock(0)
                 .category(request.getCategory())
                 .build();
 
@@ -82,7 +84,15 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setCategory(request.getCategory());
-        product.setStock(request.getStock());
+
+        int newTotalStock = request.getTotalStock();
+        int diff = newTotalStock - product.getTotalStock();
+
+        product.setTotalStock(newTotalStock);
+        product.setAvailableStock(
+                product.getAvailableStock() + diff
+        );
+
 
         return mapToResponse(productRepository.save(product));
     }
@@ -106,7 +116,9 @@ public class ProductServiceImpl implements ProductService {
         response.setName(product.getName());
         response.setDescription(product.getDescription());
         response.setPrice(product.getPrice());
-        response.setStock(product.getStock());
+        response.setTotalStock(product.getTotalStock());
+        response.setAvailableStock(product.getAvailableStock());
+        response.setReservedStock(product.getReservedStock());
         response.setCategory(product.getCategory());
 
         // Reviews data (from Product snapshot)

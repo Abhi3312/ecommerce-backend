@@ -19,7 +19,6 @@ public class OrderItem {
     @ManyToOne(optional = false)
     private Order order;
 
-    // Snapshot fields
     private Long productId;
     private String productName;
     private BigDecimal price;

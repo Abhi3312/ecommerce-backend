@@ -29,7 +29,16 @@ public class Product {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private Integer stock;
+    private Integer totalStock;
+
+    @Column(nullable = false)
+    private Integer availableStock;
+
+    @Column(nullable = false)
+    private Integer reservedStock = 0;
+
+    @Version
+    private Long version;
 
     @Column(nullable = false)
     private String category;

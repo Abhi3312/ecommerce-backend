@@ -20,7 +20,7 @@ public class ProductRequest {
     private BigDecimal price;
 
     @NotNull
-    private Integer stock;
+    private Integer totalStock;
 
     @NotBlank
     private String category;

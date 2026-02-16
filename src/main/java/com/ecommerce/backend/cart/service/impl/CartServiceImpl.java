@@ -44,9 +44,10 @@ public class CartServiceImpl implements CartService {
             throw new BadRequestException("Quantity must be at least 1");
         }
 
-        if (request.getQuantity() > product.getStock()) {
+        if (request.getQuantity() > product.getAvailableStock()) {
             throw new BadRequestException("Insufficient stock");
         }
+
 
         Cart cart = cartRepository.findByUser(user)
                 .orElseGet(() -> {
@@ -63,9 +64,10 @@ public class CartServiceImpl implements CartService {
             CartItem item = existingItem.get();
             int newQty = item.getQuantity() + request.getQuantity();
 
-            if (newQty > product.getStock()) {
+            if (newQty > product.getAvailableStock()) {
                 throw new BadRequestException("Insufficient stock");
             }
+
 
             item.setQuantity(newQty);
         } else {
@@ -97,9 +99,10 @@ public class CartServiceImpl implements CartService {
             throw new BadRequestException("Quantity must be at least 1");
         }
 
-        if (request.getQuantity() > cartItem.getProduct().getStock()) {
+        if (request.getQuantity() > cartItem.getProduct().getAvailableStock()) {
             throw new BadRequestException("Insufficient stock");
         }
+
 
         cartItem.setQuantity(request.getQuantity());
 

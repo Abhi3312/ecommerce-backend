@@ -13,10 +13,12 @@ public class ProductResponse {
     private String name;
     private String description;
     private BigDecimal price;
-    private int stock;
+    private Integer totalStock;
+    private Integer availableStock;
+    private Integer reservedStock;
     private String category;
 
-    // Reviews data
+
     private double averageRating;
     private int totalReviews;
 }
